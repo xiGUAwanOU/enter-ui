@@ -1,0 +1,24 @@
+$colors: (
+  "primary": #2E86C1,
+  "primary-lighter": #3498DB,
+  "primary-disabled": #AED6F1,
+  "default": #909497,
+  "default-lighter": #A6ACAF,
+  "default-disabled": #D7DBDD,
+  "success": #28B463,
+  "success-lighter": #2ECC71,
+  "success-disabled": #ABEBC6,
+  "info": #27C0C4,
+  "info-lighter": #5DD0D3,
+  "info-disabled": #AEE7E9,
+  "warning": #F1C40F,
+  "warning-lighter": #F4D03F,
+  "warning-disabled": #F9E79F,
+  "danger": #C0392B,
+  "danger-lighter": #CD6155,
+  "danger-disabled": #E6B0AA,
+);
+
+* {
+  font-family: Verdana, Geneva, sans-serif;
+}

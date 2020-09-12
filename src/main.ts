@@ -1,4 +1,9 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { Plugin } from 'vue';
 
-createApp(App).mount('#app')
+import Button from '@/components/Button/Button.vue';
+
+export default {
+  install(app) {
+    app.component('EButton', Button);
+  },
+} as Plugin;
