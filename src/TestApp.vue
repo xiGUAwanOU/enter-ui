@@ -1,37 +1,30 @@
 <template>
-  <e-button>Default</e-button>
-  <e-button visual-type="primary">Primary</e-button>
-  <e-button visual-type="success">Success</e-button>
-  <e-button visual-type="info">Info</e-button>
-  <e-button visual-type="warning">Warning</e-button>
-  <e-button visual-type="danger">Danger</e-button>
+  <e-text-input placeholder="Type something here..." v-model="value" />
+  <e-button>Search</e-button>
   <br />
   <br />
-  <e-button outlined>Default</e-button>
-  <e-button outlined visual-type="primary">Primary</e-button>
-  <e-button outlined visual-type="success">Success</e-button>
-  <e-button outlined visual-type="info">Info</e-button>
-  <e-button outlined visual-type="warning">Warning</e-button>
-  <e-button outlined visual-type="danger">Danger</e-button>
+  <e-text-input visual-type="primary" placeholder="Type something here..." v-model="value" />
+  <e-button visual-type="primary">Search</e-button>
   <br />
   <br />
-  <e-button disabled>Default</e-button>
-  <e-button disabled visual-type="primary">Primary</e-button>
-  <e-button disabled visual-type="success">Success</e-button>
-  <e-button disabled visual-type="info">Info</e-button>
-  <e-button disabled visual-type="warning">Warning</e-button>
-  <e-button disabled visual-type="danger">Danger</e-button>
+  <e-text-input visual-type="danger" placeholder="Type something here..." v-model="value" />
+  <e-button visual-type="danger">Search</e-button>
   <br />
   <br />
-  <e-button disabled outlined>Default</e-button>
-  <e-button disabled outlined visual-type="primary">Primary</e-button>
-  <e-button disabled outlined visual-type="success">Success</e-button>
-  <e-button disabled outlined visual-type="info">Info</e-button>
-  <e-button disabled outlined visual-type="warning">Warning</e-button>
-  <e-button disabled outlined visual-type="danger">Danger</e-button>
-  <br />
-  <br />
-  <e-button size="small">Small</e-button>
-  <e-button>Medium</e-button>
-  <e-button size="large">Large</e-button>
+  <e-text-input size="small" placeholder="Small" v-model="value" />
+  <e-text-input size="medium" placeholder="Medium" v-model="value" />
+  <e-text-input size="large" placeholder="Large" v-model="value" />
 </template>
+
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+
+export default defineComponent({
+  setup() {
+    const value = ref('');
+    return {
+      value,
+    };
+  },
+});
+</script>

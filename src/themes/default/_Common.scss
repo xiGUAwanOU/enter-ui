@@ -1,0 +1,48 @@
+$colors: (
+  "primary": #2E86C1,
+  "primary-dark": #21618C,
+  "primary-light": #3498DB,
+  "primary-lighter": #AED6F1,
+
+  "default": #909497,
+  "default-dark": #797D7F,
+  "default-light": #A6ACAF,
+  "default-lighter": #D7DBDD,
+
+  "success": #28B463,
+  "success-dark": #239B56,
+  "success-light": #2ECC71,
+  "success-lighter": #ABEBC6,
+
+  "info": #27C0C4,
+  "info-dark": #22A8AC,
+  "info-light": #5DD0D3,
+  "info-lighter": #AEE7E9,
+
+  "warning": #F1C40F,
+  "warning-dark": #D4AC0D,
+  "warning-light": #F4D03F,
+  "warning-lighter": #F9E79F,
+
+  "danger": #C0392B,
+  "danger-dark": #A93226,
+  "danger-light": #CD6155,
+  "danger-lighter": #E6B0AA,
+);
+
+* {
+  color: #626567;
+  font-family: Verdana, Geneva, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin make-distance($top-level-class) {
+  #{$top-level-class}:not(:last-child) {
+    margin-right: 5px;
+  }
+}
+
+@mixin make-box-shadow($color) {
+  box-shadow: 0 0 3px 1px $color;
+}

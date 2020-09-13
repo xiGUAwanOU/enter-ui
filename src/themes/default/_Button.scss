@@ -1,0 +1,73 @@
+@use "sass:map";
+
+@import 'Common';
+
+@include make-distance(".e-button");
+
+.e-button {
+  border-width: 1px;
+  border-style: solid;
+  outline: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: 0.1s;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.e-button {
+  &.e-button--size-small {
+    height: 24px;
+    padding: 0 16px;
+    font-size: 12px;
+  }
+
+  &.e-button--size-medium {
+    height: 28px;
+    padding: 0 20px;
+    font-size: 14px;
+  }
+
+  &.e-button--size-large {
+    height: 32px;
+    padding: 0 24px;
+    font-size: 16px;
+  }
+}
+
+@mixin make-visual-style($visual-type) {
+  .e-button.e-button--visual-type-#{$visual-type}{
+    border-color: map.get($colors, $visual-type);
+    background-color: map.get($colors, $visual-type);
+    color: #ffffff;
+
+    &:focus {
+      @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
+    }
+
+    &:hover {
+      border-color: map.get($colors, "#{$visual-type}-light");
+      background-color: map.get($colors, "#{$visual-type}-light");
+      color: #ffffff;
+      @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
+    }
+
+    &:active:hover {
+      border-color: map.get($colors, "#{$visual-type}-dark");
+      background-color: map.get($colors, "#{$visual-type}-dark");
+      color: #ffffff;
+    }
+
+    &:disabled {
+      border-color: map.get($colors, "#{$visual-type}-lighter");
+      background-color: map.get($colors, "#{$visual-type}-lighter");
+      color: #ffffff;
+    }
+  }
+}
+
+@include make-visual-style("default");
+@include make-visual-style("primary");
+@include make-visual-style("danger");

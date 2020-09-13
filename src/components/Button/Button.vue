@@ -1,11 +1,10 @@
 <template>
   <button
     class="e-button"
-    :class="{
-      [`e-button--visual-type-${visualType}`]: true,
-      [`e-button--size-${size}`]: true,
-      'e-button--outlined': outlined,
-    }"
+    :class="[
+      `e-button--visual-type-${visualType}`,
+      `e-button--size-${size}`,
+    ]"
     :disabled="disabled"
     @click="handleClick"
   >
@@ -16,7 +15,7 @@
 <script lang="ts">
 import { PropType, defineComponent } from 'vue';
 
-import { ComponentSize, VisualType } from '@/components/Common/Common.types';
+import { ActionVisualType, ComponentSize } from '@/components/Common/Common.types';
 
 export default defineComponent({
   name: 'EButton',
@@ -24,8 +23,7 @@ export default defineComponent({
   props: {
     disabled: { type: Boolean, default: false },
     size: { type: String as PropType<ComponentSize>, default: 'medium' },
-    visualType: { type: String as PropType<VisualType>, default: 'default' },
-    outlined: { type: Boolean, default: false },
+    visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
   },
 
   setup(props, ctx) {

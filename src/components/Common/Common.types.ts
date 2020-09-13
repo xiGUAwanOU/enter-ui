@@ -1,3 +1,4 @@
 export type ComponentSize = 'small' | 'medium' | 'large';
 
-export type VisualType = 'primary' | 'default' | 'success' | 'info' | 'warning' | 'danger';
+export type ActionVisualType = 'primary' | 'default' | 'danger';
+export type InfoVisualType = 'primary' | 'default' | 'success' | 'info' | 'warning' | 'danger';
