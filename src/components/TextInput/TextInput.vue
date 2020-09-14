@@ -19,7 +19,7 @@
 <script lang="ts">
 import { PropType, computed, defineComponent } from 'vue';
 
-import { ActionVisualType, ComponentSize } from '@/components/Common/Common.types';
+import { ActionVisualType, ComponentSize } from '@/components/Shared/Common.types';
 
 export default defineComponent({
   name: 'ETextInput',

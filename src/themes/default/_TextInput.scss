@@ -1,6 +1,6 @@
 @use "sass:map";
 
-@import 'Common';
+@import "Common";
 
 @include make-distance(".e-text-input");
 
@@ -16,13 +16,13 @@
     outline: 0;
     width: 100%;
     transition: 0.1s;
-  
+
     &:disabled {
       cursor: not-allowed;
     }
 
     &::placeholder {
-      color: #A6ACAF;
+      color: #a6acaf;
       opacity: 1;
     }
   }
@@ -31,8 +31,8 @@
 .e-text-input {
   &.e-text-input--size-small {
     & > .e-text-input__inner {
-      padding-left: 10px;
-      padding-right: 10px;
+      padding-left: 8px;
+      padding-right: 8px;
       height: 24px;
       font-size: 12px;
     }
@@ -40,8 +40,8 @@
 
   &.e-text-input--size-medium {
     & > .e-text-input__inner {
-      padding-left: 12px;
-      padding-right: 12px;
+      padding-left: 10px;
+      padding-right: 10px;
       height: 28px;
       font-size: 14px;
     }
@@ -49,8 +49,8 @@
 
   &.e-text-input--size-large {
     & > .e-text-input__inner {
-      padding-left: 14px;
-      padding-right: 14px;
+      padding-left: 12px;
+      padding-right: 12px;
       height: 32px;
       font-size: 16px;
     }
@@ -58,14 +58,14 @@
 }
 
 @mixin make-visual-style($visual-type) {
-  .e-text-input.e-text-input--visual-type-#{$visual-type}{
+  .e-text-input.e-text-input--visual-type-#{$visual-type} {
     & > .e-text-input__inner {
       border-color: map.get($colors, $visual-type);
-  
+
       &:focus {
         @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
       }
-  
+
       &:disabled {
         border-color: map.get($colors, "#{$visual-type}-lighter");
       }
