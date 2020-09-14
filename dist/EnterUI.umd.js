@@ -96,6 +96,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
+/***/ "2209":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "8875":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -338,7 +345,11 @@ function TextInputvue_type_template_id_c271e440_bindings_render(_ctx, _cache, $p
 TextInputvue_type_script_lang_ts.render = TextInputvue_type_template_id_c271e440_bindings_render
 
 /* harmony default export */ var TextInput = (TextInputvue_type_script_lang_ts);
+// EXTERNAL MODULE: ./src/themes/default/Main.scss
+var Main = __webpack_require__("2209");
+
 // CONCATENATED MODULE: ./src/main.ts
+
 
 
 /* harmony default export */ var main = ({
