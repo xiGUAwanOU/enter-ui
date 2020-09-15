@@ -25,8 +25,8 @@ export default defineComponent({
   name: 'ETextInput',
 
   props: {
-    disabled: { type: Boolean, default: false },
     modelValue: { type: String, required: true },
+    disabled: { type: Boolean, default: false },
     placeholder: { type: String, default: '' },
     size: { type: String as PropType<ComponentSize>, default: 'medium' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
