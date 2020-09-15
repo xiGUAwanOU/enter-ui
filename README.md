@@ -15,4 +15,16 @@ The use case of Enter UI is definitely far more than building a management conso
 
 We believe that most of the content management tasks can be summarized to the workflow that we have mentioned before. And this library is an implementation of this workflow.
 
+## Development
 
+We are going to implement following components:
+* Button: perform an action
+* Text Input (can be used for password): input for strings
+* Number Input: input for numbers
+* Multiline Input: input for long strings 
+* Multiple select: a dropdown (or a list?) of checkboxes for selecting more than one item
+* Single select: basically a dropdown for selecting one item
+* Toggle: input for boolean values
+* File Uploader: input for files
+* Date/Time Picker: input for timestamps
+* Simple Table: display small amount of data without taking much space
