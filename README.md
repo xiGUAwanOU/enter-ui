@@ -28,3 +28,9 @@ We are going to implement following components:
 * File Uploader: input for files
 * Date/Time Picker: input for timestamps
 * Simple Table: display small amount of data without taking much space
+* Key-value Pairs: display an object (can also be structured)
+* Auto Form: generate simple form with JSON schema or JSON config in other format
+* Dialog: a modal dialog for displaying information or asking for some information
+* Notification: display a message at the bottom right corner
+* Progress Bar: display the progress of a long going task
+* Box: group a set of components by displaying a border around them
