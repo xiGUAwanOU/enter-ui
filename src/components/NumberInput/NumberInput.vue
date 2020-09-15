@@ -1,15 +1,16 @@
 <template>
   <div
-    class="e-number-input"
+    class="e-input"
     :class="[
-      `e-number-input--visual-type-${visualType}`,
-      `e-number-input--size-${size}`,
+      `e-input--visual-type-${visualType}`,
+      `e-input--size-${size}`,
     ]"
   >
     <input
-      class="e-number-input__inner"
+      class="e-input__inner e-input__inner--number"
       type="text"
       :placeholder="placeholder"
+      :disabled="disabled"
       :value="stringValue"
       @input="onInput"
       @blur="onBlur"
@@ -54,11 +55,18 @@ export default defineComponent({
       integerPart = integerGroupingFunction(integerPart);
 
       let fractionalPart = parts[1];
-      if (fractionalPart === undefined || props.fractionalDigits === 0) {
+      if (
+        fractionalPart === undefined ||
+        (props.fractionalDigits !== undefined && props.fractionalDigits === 0)
+      ) {
         return `${isNegative ? '-' : ''}${integerPart}`;
       }
 
-      fractionalPart = fractionalPart.replaceAll(/\D/g, '').substring(0, props.fractionalDigits);
+      fractionalPart = fractionalPart.replaceAll(/\D/g, '');
+
+      if (props.fractionalDigits !== undefined) {
+        fractionalPart = fractionalPart.substring(0, props.fractionalDigits);
+      }
 
       if (integerPart.endsWith(props.groupingSeparator)) {
         integerPart = integerPart.substring(0, integerPart.length - 1);
@@ -103,6 +111,8 @@ export default defineComponent({
         return;
       }
 
+      console.log(newStringValue);
+
       ctx.emit('update:modelValue', Number(newStringValue
         .replaceAll(props.groupingSeparator, '')
         .replaceAll(props.decimalSeparator, '.')));
@@ -114,7 +124,10 @@ export default defineComponent({
         return;
       }
 
-      let stringModelValue = new Intl.NumberFormat('en-US', { useGrouping: false }).format(props.modelValue);
+      let stringModelValue = new Intl.NumberFormat('en-US', {
+        useGrouping: false,
+        maximumFractionDigits: 20,
+      }).format(props.modelValue);
       stringModelValue = stringModelValue.replaceAll('.', props.decimalSeparator);
 
       stringValue.value = sanitizeStringValue(stringModelValue, thousandsGrouping);

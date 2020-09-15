@@ -2,12 +2,12 @@
 
 @import "Common";
 
-@include make-distance(".e-number-input");
+@include make-distance(".e-input");
 
-.e-number-input {
+.e-input {
   display: inline-block;
 
-  & > .e-number-input__inner {
+  & > .e-input__inner {
     display: block;
     box-sizing: border-box;
     border-width: 1px;
@@ -15,7 +15,6 @@
     border-radius: 2px;
     outline: 0;
     width: 100%;
-    text-align: end;
     transition: 0.1s;
 
     &:disabled {
@@ -29,9 +28,9 @@
   }
 }
 
-.e-number-input {
-  &.e-number-input--size-small {
-    & > .e-number-input__inner {
+.e-input {
+  &.e-input--size-small {
+    & > .e-input__inner {
       padding-left: 8px;
       padding-right: 8px;
       height: 24px;
@@ -39,8 +38,8 @@
     }
   }
 
-  &.e-number-input--size-medium {
-    & > .e-number-input__inner {
+  &.e-input--size-medium {
+    & > .e-input__inner {
       padding-left: 10px;
       padding-right: 10px;
       height: 28px;
@@ -48,8 +47,8 @@
     }
   }
 
-  &.e-number-input--size-large {
-    & > .e-number-input__inner {
+  &.e-input--size-large {
+    & > .e-input__inner {
       padding-left: 12px;
       padding-right: 12px;
       height: 32px;
@@ -59,12 +58,17 @@
 }
 
 @mixin make-visual-style($visual-type) {
-  .e-number-input.e-number-input--visual-type-#{$visual-type} {
-    & > .e-number-input__inner {
+  .e-input.e-input--visual-type-#{$visual-type} {
+    & > .e-input__inner {
       border-color: map.get($colors, $visual-type);
 
       &:focus {
         @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
+      }
+
+      &:hover {
+        @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
+        border-color: map.get($colors, "#{$visual-type}-light");
       }
 
       &:disabled {

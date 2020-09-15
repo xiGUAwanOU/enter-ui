@@ -1,14 +1,14 @@
 <template>
   <div
-    class="e-text-input"
+    class="e-input"
     :class="[
-      `e-text-input--visual-type-${visualType}`,
-      `e-text-input--size-${size}`,
+      `e-input--visual-type-${visualType}`,
+      `e-input--size-${size}`,
     ]"
   >
     <input
-      class="e-text-input__inner"
-      type="text"
+      class="e-input__inner"
+      :type="hideContent ? 'password' : 'text'"
       :disabled="disabled"
       :placeholder="placeholder"
       v-model="inputValue"
@@ -27,6 +27,7 @@ export default defineComponent({
   props: {
     modelValue: { type: String, required: true },
     disabled: { type: Boolean, default: false },
+    hideContent: { type: Boolean, default: false },
     placeholder: { type: String, default: '' },
     size: { type: String as PropType<ComponentSize>, default: 'medium' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
