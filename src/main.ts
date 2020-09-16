@@ -2,8 +2,8 @@ import { Plugin } from 'vue';
 
 import Button from '@/components/Button/Button.vue';
 import MultilineInput from '@/components/MultilineInput/MultilineInput.vue';
-import NumberInput from '@/components/NumberInput/NumberInput.vue';
-import TextInput from '@/components/TextInput/TextInput.vue';
+import NumberInput from '@/components/Input/NumberInput.vue';
+import TextInput from '@/components/Input/TextInput.vue';
 
 import '@/themes/default/Main.scss';
 
