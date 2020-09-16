@@ -1,21 +1,17 @@
 <template>
-  <div
+  <input
     class="e-input"
     :class="[
       `e-input--visual-type-${visualType}`,
       `e-input--size-${size}`,
     ]"
-  >
-    <input
-      class="e-input__inner e-input__inner--number"
-      type="text"
-      :placeholder="placeholder"
-      :disabled="disabled"
-      :value="stringValue"
-      @input="onInput"
-      @blur="onBlur"
-    />
-  </div>
+    type="text"
+    :placeholder="placeholder"
+    :disabled="disabled"
+    :value="stringValue"
+    @input="onInput"
+    @blur="onBlur"
+  />
 </template>
 
 <script lang="ts">

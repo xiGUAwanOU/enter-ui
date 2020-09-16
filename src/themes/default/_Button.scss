@@ -48,10 +48,10 @@
     }
 
     &:hover {
+      @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
       border-color: map.get($colors, "#{$visual-type}-light");
       background-color: map.get($colors, "#{$visual-type}-light");
       color: #ffffff;
-      @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
     }
 
     &:active:hover {
@@ -61,6 +61,7 @@
     }
 
     &:disabled {
+      @include disable-box-shadow();
       border-color: map.get($colors, "#{$visual-type}-lighter");
       background-color: map.get($colors, "#{$visual-type}-lighter");
       color: #ffffff;

@@ -1,11 +1,12 @@
 <template>
-  <input
-    class="e-input"
+  <textarea
+    class="e-multiline-input"
     :class="[
-      `e-input--visual-type-${visualType}`,
-      `e-input--size-${size}`,
+      `e-multiline-input--visual-type-${visualType}`,
+      `e-multiline-input--size-${size}`,
     ]"
-    :type="hideContent ? 'password' : 'text'"
+    :style="{ 'resize': resize }"
+    :rows="rows.toString()"
     :disabled="disabled"
     :placeholder="placeholder"
     v-model="inputValue"
@@ -18,13 +19,14 @@ import { PropType, computed, defineComponent } from 'vue';
 import { ActionVisualType, ComponentSize } from '@/components/Shared/Common.types';
 
 export default defineComponent({
-  name: 'ETextInput',
+  name: 'EMultilineInput',
 
   props: {
     modelValue: { type: String, required: true },
     disabled: { type: Boolean, default: false },
-    hideContent: { type: Boolean, default: false },
     placeholder: { type: String, default: '' },
+    resize: { type: String, default: 'vertical' },
+    rows: { type: Number, default: 5 },
     size: { type: String as PropType<ComponentSize>, default: 'medium' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
   },

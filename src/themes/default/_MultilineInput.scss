@@ -2,9 +2,7 @@
 
 @import "Common";
 
-@include make-distance(".e-input");
-
-.e-input {
+.e-multiline-input {
   box-sizing: border-box;
   border-width: 1px;
   border-style: solid;
@@ -22,31 +20,25 @@
   }
 }
 
-.e-input {
-  &.e-input--size-small {
-    padding-left: 8px;
-    padding-right: 8px;
-    height: 24px;
+.e-multiline-input {
+  &.e-multiline-input--size-small {
+    padding: 8px;
     font-size: 12px;
   }
 
-  &.e-input--size-medium {
-    padding-left: 10px;
-    padding-right: 10px;
-    height: 28px;
+  &.e-multiline-input--size-medium {
+    padding: 10px;
     font-size: 14px;
   }
 
-  &.e-input--size-large {
-    padding-left: 12px;
-    padding-right: 12px;
-    height: 32px;
+  &.e-multiline-input--size-large {
+    padding: 12px;
     font-size: 16px;
   }
 }
 
 @mixin make-visual-style($visual-type) {
-  .e-input.e-input--visual-type-#{$visual-type} {
+  .e-multiline-input.e-multiline-input--visual-type-#{$visual-type} {
     border-color: map.get($colors, $visual-type);
 
     &:focus {

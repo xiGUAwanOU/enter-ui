@@ -87,6 +87,21 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "00ee":
+/***/ (function(module, exports, __webpack_require__) {
+
+var wellKnownSymbol = __webpack_require__("b622");
+
+var TO_STRING_TAG = wellKnownSymbol('toStringTag');
+var test = {};
+
+test[TO_STRING_TAG] = 'z';
+
+module.exports = String(test) === '[object z]';
+
+
+/***/ }),
+
 /***/ "0366":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -494,6 +509,39 @@ var hiddenKeys = enumBugKeys.concat('length', 'prototype');
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
   return internalObjectKeys(O, hiddenKeys);
 };
+
+
+/***/ }),
+
+/***/ "25f0":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var redefine = __webpack_require__("6eeb");
+var anObject = __webpack_require__("825a");
+var fails = __webpack_require__("d039");
+var flags = __webpack_require__("ad6d");
+
+var TO_STRING = 'toString';
+var RegExpPrototype = RegExp.prototype;
+var nativeToString = RegExpPrototype[TO_STRING];
+
+var NOT_GENERIC = fails(function () { return nativeToString.call({ source: 'a', flags: 'b' }) != '/a/b'; });
+// FF44- RegExp#toString has a wrong name
+var INCORRECT_NAME = nativeToString.name != TO_STRING;
+
+// `RegExp.prototype.toString` method
+// https://tc39.github.io/ecma262/#sec-regexp.prototype.tostring
+if (NOT_GENERIC || INCORRECT_NAME) {
+  redefine(RegExp.prototype, TO_STRING, function toString() {
+    var R = anObject(this);
+    var p = String(R.source);
+    var rf = R.flags;
+    var f = String(rf === undefined && R instanceof RegExp && !('flags' in RegExpPrototype) ? flags.call(R) : rf);
+    return '/' + p + '/' + f;
+  }, { unsafe: true });
+}
 
 
 /***/ }),
@@ -1962,6 +2010,23 @@ module.exports = function (METHOD_NAME, options) {
 
 /***/ }),
 
+/***/ "b041":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var TO_STRING_TAG_SUPPORT = __webpack_require__("00ee");
+var classof = __webpack_require__("f5df");
+
+// `Object.prototype.toString` method implementation
+// https://tc39.github.io/ecma262/#sec-object.prototype.tostring
+module.exports = TO_STRING_TAG_SUPPORT ? {}.toString : function toString() {
+  return '[object ' + classof(this) + ']';
+};
+
+
+/***/ }),
+
 /***/ "b622":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2290,6 +2355,22 @@ module.exports = Object.setPrototypeOf || ('__proto__' in {} ? function () {
 
 /***/ }),
 
+/***/ "d3b7":
+/***/ (function(module, exports, __webpack_require__) {
+
+var TO_STRING_TAG_SUPPORT = __webpack_require__("00ee");
+var redefine = __webpack_require__("6eeb");
+var toString = __webpack_require__("b041");
+
+// `Object.prototype.toString` method
+// https://tc39.github.io/ecma262/#sec-object.prototype.tostring
+if (!TO_STRING_TAG_SUPPORT) {
+  redefine(Object.prototype, 'toString', toString, { unsafe: true });
+}
+
+
+/***/ }),
+
 /***/ "d784":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2520,6 +2601,39 @@ module.exports = Array.isArray || function isArray(arg) {
 
 /***/ }),
 
+/***/ "f5df":
+/***/ (function(module, exports, __webpack_require__) {
+
+var TO_STRING_TAG_SUPPORT = __webpack_require__("00ee");
+var classofRaw = __webpack_require__("c6b6");
+var wellKnownSymbol = __webpack_require__("b622");
+
+var TO_STRING_TAG = wellKnownSymbol('toStringTag');
+// ES3 wrong here
+var CORRECT_ARGUMENTS = classofRaw(function () { return arguments; }()) == 'Arguments';
+
+// fallback for IE11 Script Access Denied error
+var tryGet = function (it, key) {
+  try {
+    return it[key];
+  } catch (error) { /* empty */ }
+};
+
+// getting tag from ES6+ `Object.prototype.toString`
+module.exports = TO_STRING_TAG_SUPPORT ? classofRaw : function (it) {
+  var O, tag, result;
+  return it === undefined ? 'Undefined' : it === null ? 'Null'
+    // @@toStringTag case
+    : typeof (tag = tryGet(O = Object(it), TO_STRING_TAG)) == 'string' ? tag
+    // builtinTag case
+    : CORRECT_ARGUMENTS ? classofRaw(O)
+    // ES3 arguments fallback
+    : (result = classofRaw(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : result;
+};
+
+
+/***/ }),
+
 /***/ "f772":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2569,7 +2683,7 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./src/components/Button/Button.vue?vue&type=template&id=8fbc4418&bindings={}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/Button/Button.vue?vue&type=template&id=8fbc4418&bindings={}
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])("button", {
@@ -2582,7 +2696,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 }
 // CONCATENATED MODULE: ./src/components/Button/Button.vue?vue&type=template&id=8fbc4418&bindings={}
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./src/components/Button/Button.vue?vue&type=script&lang=ts
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/Button/Button.vue?vue&type=script&lang=ts
 
 /* harmony default export */ var Buttonvue_type_script_lang_ts = (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["defineComponent"])({
   name: 'EButton',
@@ -2619,15 +2733,101 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 Buttonvue_type_script_lang_ts.render = render
 
 /* harmony default export */ var Button = (Buttonvue_type_script_lang_ts);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./src/components/NumberInput/NumberInput.vue?vue&type=template&id=6da2ee46&bindings={}
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
+var es_object_to_string = __webpack_require__("d3b7");
 
-function NumberInputvue_type_template_id_6da2ee46_bindings_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])("div", {
-    class: ["e-number-input", ["e-number-input--visual-type-".concat(_ctx.visualType), "e-number-input--size-".concat(_ctx.size)]]
-  }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])("input", {
-    class: "e-number-input__inner",
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.to-string.js
+var es_regexp_to_string = __webpack_require__("25f0");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/MultilineInput/MultilineInput.vue?vue&type=template&id=2976ef44&bindings={}
+
+
+
+function MultilineInputvue_type_template_id_2976ef44_bindings_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["withDirectives"])((Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])("textarea", {
+    class: ["e-multiline-input", ["e-multiline-input--visual-type-".concat(_ctx.visualType), "e-multiline-input--size-".concat(_ctx.size)]],
+    style: {
+      'resize': _ctx.resize
+    },
+    rows: _ctx.rows.toString(),
+    disabled: _ctx.disabled,
+    placeholder: _ctx.placeholder,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return _ctx.inputValue = $event;
+    })
+  }, null, 14, ["rows", "disabled", "placeholder"])), [[external_commonjs_vue_commonjs2_vue_root_Vue_["vModelText"], _ctx.inputValue]]);
+}
+// CONCATENATED MODULE: ./src/components/MultilineInput/MultilineInput.vue?vue&type=template&id=2976ef44&bindings={}
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
+var es_number_constructor = __webpack_require__("a9e3");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/MultilineInput/MultilineInput.vue?vue&type=script&lang=ts
+
+
+/* harmony default export */ var MultilineInputvue_type_script_lang_ts = (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["defineComponent"])({
+  name: 'EMultilineInput',
+  props: {
+    modelValue: {
+      type: String,
+      required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    resize: {
+      type: String,
+      default: 'vertical'
+    },
+    rows: {
+      type: Number,
+      default: 5
+    },
+    size: {
+      type: String,
+      default: 'medium'
+    },
+    visualType: {
+      type: String,
+      default: 'default'
+    }
+  },
+  setup: function setup(props, ctx) {
+    var inputValue = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["computed"])({
+      get: function get() {
+        return props.modelValue;
+      },
+      set: function set(value) {
+        ctx.emit('input', value);
+      }
+    });
+    return {
+      inputValue: inputValue
+    };
+  }
+}));
+// CONCATENATED MODULE: ./src/components/MultilineInput/MultilineInput.vue?vue&type=script&lang=ts
+ 
+// CONCATENATED MODULE: ./src/components/MultilineInput/MultilineInput.vue
+
+
+
+MultilineInputvue_type_script_lang_ts.render = MultilineInputvue_type_template_id_2976ef44_bindings_render
+
+/* harmony default export */ var MultilineInput = (MultilineInputvue_type_script_lang_ts);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/NumberInput/NumberInput.vue?vue&type=template&id=ba0909e4&bindings={}
+
+function NumberInputvue_type_template_id_ba0909e4_bindings_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])("input", {
+    class: ["e-input", ["e-input--visual-type-".concat(_ctx.visualType), "e-input--size-".concat(_ctx.size)]],
     type: "text",
     placeholder: _ctx.placeholder,
+    disabled: _ctx.disabled,
     value: _ctx.stringValue,
     onInput: _cache[1] || (_cache[1] = function () {
       return _ctx.onInput.apply(_ctx, arguments);
@@ -2635,9 +2835,9 @@ function NumberInputvue_type_template_id_6da2ee46_bindings_render(_ctx, _cache, 
     onBlur: _cache[2] || (_cache[2] = function () {
       return _ctx.onBlur.apply(_ctx, arguments);
     })
-  }, null, 40, ["placeholder", "value"])], 2);
+  }, null, 42, ["placeholder", "disabled", "value"]);
 }
-// CONCATENATED MODULE: ./src/components/NumberInput/NumberInput.vue?vue&type=template&id=6da2ee46&bindings={}
+// CONCATENATED MODULE: ./src/components/NumberInput/NumberInput.vue?vue&type=template&id=ba0909e4&bindings={}
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -2647,9 +2847,6 @@ var es_array_join = __webpack_require__("a15b");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
-var es_number_constructor = __webpack_require__("a9e3");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.is-nan.js
 var es_number_is_nan = __webpack_require__("9129");
@@ -2666,7 +2863,7 @@ var es_string_split = __webpack_require__("1276");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.starts-with.js
 var es_string_starts_with = __webpack_require__("2ca0");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./src/components/NumberInput/NumberInput.vue?vue&type=script&lang=ts
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/NumberInput/NumberInput.vue?vue&type=script&lang=ts
 
 
 
@@ -2728,11 +2925,15 @@ var es_string_starts_with = __webpack_require__("2ca0");
       integerPart = integerGroupingFunction(integerPart);
       var fractionalPart = parts[1];
 
-      if (fractionalPart === undefined || props.fractionalDigits === 0) {
+      if (fractionalPart === undefined || props.fractionalDigits !== undefined && props.fractionalDigits === 0) {
         return "".concat(isNegative ? '-' : '').concat(integerPart);
       }
 
-      fractionalPart = fractionalPart.replaceAll(/\D/g, '').substring(0, props.fractionalDigits);
+      fractionalPart = fractionalPart.replaceAll(/\D/g, '');
+
+      if (props.fractionalDigits !== undefined) {
+        fractionalPart = fractionalPart.substring(0, props.fractionalDigits);
+      }
 
       if (integerPart.endsWith(props.groupingSeparator)) {
         integerPart = integerPart.substring(0, integerPart.length - 1);
@@ -2776,6 +2977,7 @@ var es_string_starts_with = __webpack_require__("2ca0");
         return;
       }
 
+      console.log(newStringValue);
       ctx.emit('update:modelValue', Number(newStringValue.replaceAll(props.groupingSeparator, '').replaceAll(props.decimalSeparator, '.')));
     }
 
@@ -2788,7 +2990,8 @@ var es_string_starts_with = __webpack_require__("2ca0");
       }
 
       var stringModelValue = new Intl.NumberFormat('en-US', {
-        useGrouping: false
+        useGrouping: false,
+        maximumFractionDigits: 20
       }).format(props.modelValue);
       stringModelValue = stringModelValue.replaceAll('.', props.decimalSeparator);
       stringValue.value = sanitizeStringValue(stringModelValue, thousandsGrouping);
@@ -2806,27 +3009,25 @@ var es_string_starts_with = __webpack_require__("2ca0");
 
 
 
-NumberInputvue_type_script_lang_ts.render = NumberInputvue_type_template_id_6da2ee46_bindings_render
+NumberInputvue_type_script_lang_ts.render = NumberInputvue_type_template_id_ba0909e4_bindings_render
 
 /* harmony default export */ var NumberInput = (NumberInputvue_type_script_lang_ts);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./src/components/TextInput/TextInput.vue?vue&type=template&id=68215894&bindings={}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/TextInput/TextInput.vue?vue&type=template&id=b7ddd1b0&bindings={}
 
-function TextInputvue_type_template_id_68215894_bindings_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])("div", {
-    class: ["e-text-input", ["e-text-input--visual-type-".concat(_ctx.visualType), "e-text-input--size-".concat(_ctx.size)]]
-  }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["withDirectives"])(Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])("input", {
-    class: "e-text-input__inner",
-    type: "text",
+function TextInputvue_type_template_id_b7ddd1b0_bindings_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["withDirectives"])((Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])("input", {
+    class: ["e-input", ["e-input--visual-type-".concat(_ctx.visualType), "e-input--size-".concat(_ctx.size)]],
+    type: _ctx.hideContent ? 'password' : 'text',
     disabled: _ctx.disabled,
     placeholder: _ctx.placeholder,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return _ctx.inputValue = $event;
     })
-  }, null, 8, ["disabled", "placeholder"]), [[external_commonjs_vue_commonjs2_vue_root_Vue_["vModelText"], _ctx.inputValue]])], 2);
+  }, null, 10, ["type", "disabled", "placeholder"])), [[external_commonjs_vue_commonjs2_vue_root_Vue_["vModelDynamic"], _ctx.inputValue]]);
 }
-// CONCATENATED MODULE: ./src/components/TextInput/TextInput.vue?vue&type=template&id=68215894&bindings={}
+// CONCATENATED MODULE: ./src/components/TextInput/TextInput.vue?vue&type=template&id=b7ddd1b0&bindings={}
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./src/components/TextInput/TextInput.vue?vue&type=script&lang=ts
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/TextInput/TextInput.vue?vue&type=script&lang=ts
 
 /* harmony default export */ var TextInputvue_type_script_lang_ts = (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["defineComponent"])({
   name: 'ETextInput',
@@ -2836,6 +3037,10 @@ function TextInputvue_type_template_id_68215894_bindings_render(_ctx, _cache, $p
       required: true
     },
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    hideContent: {
       type: Boolean,
       default: false
     },
@@ -2872,7 +3077,7 @@ function TextInputvue_type_template_id_68215894_bindings_render(_ctx, _cache, $p
 
 
 
-TextInputvue_type_script_lang_ts.render = TextInputvue_type_template_id_68215894_bindings_render
+TextInputvue_type_script_lang_ts.render = TextInputvue_type_template_id_b7ddd1b0_bindings_render
 
 /* harmony default export */ var TextInput = (TextInputvue_type_script_lang_ts);
 // EXTERNAL MODULE: ./src/themes/default/Main.scss
@@ -2883,9 +3088,11 @@ var Main = __webpack_require__("2209");
 
 
 
+
 /* harmony default export */ var main = ({
   install: function install(app) {
     app.component('EButton', Button);
+    app.component('EMultilineInput', MultilineInput);
     app.component('ENumberInput', NumberInput);
     app.component('ETextInput', TextInput);
   }

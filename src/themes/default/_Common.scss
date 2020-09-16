@@ -39,10 +39,14 @@ $colors: (
 
 @mixin make-distance($top-level-class) {
   #{$top-level-class}:not(:last-child) {
-    margin-right: 5px;
+    margin-right: 8px;
   }
 }
 
 @mixin make-box-shadow($color) {
-  box-shadow: 0 0 3px 1px $color;
+  box-shadow: 0 0 0 2px $color;
+}
+
+@mixin disable-box-shadow() {
+  box-shadow: none;
 }
