@@ -6,7 +6,7 @@
       `e-multiline-input--size-${size}`,
     ]"
     :style="{ 'resize': resize }"
-    :rows="rows.toString()"
+    :rows="rows"
     :disabled="disabled"
     :placeholder="placeholder"
     v-model="inputValue"
@@ -18,6 +18,8 @@ import { PropType, computed, defineComponent } from 'vue';
 
 import { ActionVisualType, ComponentSize } from '@/components/Shared/Common.types';
 
+type ResizeValue = 'both' | 'vertical' | 'horizontal' | 'none';
+
 export default defineComponent({
   name: 'EMultilineInput',
 
@@ -25,7 +27,7 @@ export default defineComponent({
     modelValue: { type: String, required: true },
     disabled: { type: Boolean, default: false },
     placeholder: { type: String, default: '' },
-    resize: { type: String, default: 'vertical' },
+    resize: { type: String as PropType<ResizeValue>, default: 'none' },
     rows: { type: Number, default: 5 },
     size: { type: String as PropType<ComponentSize>, default: 'medium' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
