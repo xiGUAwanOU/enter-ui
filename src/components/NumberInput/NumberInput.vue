@@ -29,7 +29,7 @@ export default defineComponent({
     fractionalDigits: { type: Number },
     decimalSeparator: { type: String, default: '.' },
     groupingSeparator: { type: String, default: ',' },
-    size: { type: String as PropType<ComponentSize>, default: 'medium' },
+    size: { type: String as PropType<ComponentSize>, default: 'small' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
   },
 

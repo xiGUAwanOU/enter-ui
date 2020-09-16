@@ -25,7 +25,7 @@ export default defineComponent({
     disabled: { type: Boolean, default: false },
     hideContent: { type: Boolean, default: false },
     placeholder: { type: String, default: '' },
-    size: { type: String as PropType<ComponentSize>, default: 'medium' },
+    size: { type: String as PropType<ComponentSize>, default: 'small' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
   },
 

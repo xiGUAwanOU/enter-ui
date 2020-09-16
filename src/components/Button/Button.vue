@@ -22,7 +22,7 @@ export default defineComponent({
 
   props: {
     disabled: { type: Boolean, default: false },
-    size: { type: String as PropType<ComponentSize>, default: 'medium' },
+    size: { type: String as PropType<ComponentSize>, default: 'small' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
   },
 
