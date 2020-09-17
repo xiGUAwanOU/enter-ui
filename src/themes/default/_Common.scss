@@ -30,9 +30,9 @@ $colors: (
   "danger-lighter": #E6B0AA,
 );
 
-@mixin make-border() {
+@mixin make-border($width: 1px) {
   box-sizing: border-box;
-  border-width: 1px;
+  border-width: $width;
   border-style: solid;
   border-radius: 2px;
 }

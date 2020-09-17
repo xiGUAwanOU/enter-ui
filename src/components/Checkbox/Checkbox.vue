@@ -9,7 +9,7 @@
     <input class="e-checkbox__hidden" type="checkbox" :disabled="disabled" v-model="inputValue" />
     <span class="e-checkbox__box">
       <svg v-if="modelValue" class="e-checkbox__box-tick" width="14" height="14">
-        <polyline points="2,7 5,10 12,3" />
+        <polyline points="2,7.5 5,10.5 12,3.5" />
       </svg>
     </span>
     <span class="e-checkbox__label">

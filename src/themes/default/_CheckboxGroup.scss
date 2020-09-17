@@ -1,0 +1,34 @@
+@use "sass:map";
+
+@import 'Common';
+
+.e-checkbox-group {
+  @include make-border();
+  display: inline-block;
+  margin: 0;
+  padding: 6px 15px 9px 15px;
+}
+
+.e-checkbox-group.e-checkbox-group--horizontal {
+  padding-right: 0;
+
+  & > .e-checkbox-group__choice-wrapper > .e-checkbox-group__choice {
+    display: inline-block;
+    margin-right: 15px;
+  }
+}
+
+.e-checkbox-list__filter {
+  width: 100%;
+  margin: 5px 0;
+}
+
+@mixin make-visual-style($visual-type) {
+  .e-checkbox-group.e-checkbox-group--visual-type-#{$visual-type} {
+    border-color: map.get($colors, $visual-type);
+  }
+}
+
+@include make-visual-style("default");
+@include make-visual-style("primary");
+@include make-visual-style("danger");
