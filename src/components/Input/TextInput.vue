@@ -33,7 +33,7 @@ export default defineComponent({
     const inputValue = computed({
       get: () => props.modelValue,
       set: (value) => {
-        ctx.emit('input', value);
+        ctx.emit('update:modelValue', value);
       },
     });
 

@@ -3,10 +3,7 @@
 @import "Common";
 
 .e-multiline-input {
-  box-sizing: border-box;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 2px;
+  @include make-border();
   outline: 0;
   transition: border-color box-shadow 0.1s;
 

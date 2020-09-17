@@ -1,16 +1,18 @@
 <template>
-  <textarea
-    class="e-multiline-input"
+  <label
+    class="e-checkbox"
     :class="[
-      `e-multiline-input--visual-type-${visualType}`,
-      `e-multiline-input--size-${size}`,
+      `e-checkbox--visual-type-${visualType}`,
+      `e-checkbox--size-${size}`,
     ]"
-    :style="{ 'resize': resize }"
-    :rows="rows"
-    :disabled="disabled"
-    :placeholder="placeholder"
-    v-model="inputValue"
-  />
+  >
+    <input class="e-checkbox__inner" type="checkbox" :disabled="disabled" v-model="inputValue" />
+    <span class="e-checkbox__label">
+      <slot name />
+      <slot v-if="modelValue" name="true-content" />
+      <slot v-else name="false-content" />
+    </span>
+  </label>
 </template>
 
 <script lang="ts">
@@ -18,17 +20,12 @@ import { PropType, computed, defineComponent } from 'vue';
 
 import { ActionVisualType, ComponentSize } from '@/components/Shared/Common.types';
 
-type ResizeValue = 'both' | 'vertical' | 'horizontal' | 'none';
-
 export default defineComponent({
-  name: 'EMultilineInput',
+  name: 'ECheckbox',
 
   props: {
-    modelValue: { type: String, required: true },
+    modelValue: { type: Boolean, required: true },
     disabled: { type: Boolean, default: false },
-    placeholder: { type: String, default: '' },
-    resize: { type: String as PropType<ResizeValue>, default: 'none' },
-    rows: { type: Number, default: 5 },
     size: { type: String as PropType<ComponentSize>, default: 'small' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
   },

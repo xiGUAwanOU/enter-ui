@@ -2,13 +2,10 @@
 
 @import "Common";
 
-@include make-distance(".e-input");
-
 .e-input {
-  box-sizing: border-box;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 2px;
+  @include make-border();
+  display: inline-block;
+  vertical-align: middle;
   outline: 0;
   transition: border-color box-shadow 0.1s;
 
@@ -24,20 +21,20 @@
 
 .e-input {
   &.e-input--size-small {
-    padding: 0 8px;
     height: 22px;
+    padding: 0 8px;
     font-size: 13px;
   }
 
   &.e-input--size-medium {
-    padding: 0 10px;
     height: 26px;
+    padding: 0 10px;
     font-size: 15px;
   }
 
   &.e-input--size-large {
-    padding: 0 12px;
     height: 30px;
+    padding: 0 12px;
     font-size: 17px;
   }
 }

@@ -37,10 +37,11 @@ $colors: (
   -moz-osx-font-smoothing: grayscale;
 }
 
-@mixin make-distance($top-level-class) {
-  #{$top-level-class}:not(:last-child) {
-    margin-right: 8px;
-  }
+@mixin make-border() {
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px;
 }
 
 @mixin make-box-shadow($color) {

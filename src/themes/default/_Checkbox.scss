@@ -1,0 +1,58 @@
+@use "sass:map";
+
+@import 'Common';
+
+.e-checkbox {
+  display: inline-flex;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+}
+
+.e-checkbox__inner {
+  margin: 0 7px 0 0;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  
+    & ~ .e-checkbox__label {
+      cursor: not-allowed;
+      color: #BCC1C3;
+    }
+  }
+}
+
+.e-checkbox {
+  &.e-checkbox--size-small {
+    font-size: 13px;
+  }
+
+  &.e-checkbox--size-medium {
+    font-size: 15px;
+  }
+
+  &.e-checkbox--size-large {
+    font-size: 17px;
+  }
+}
+
+@mixin make-visual-style($visual-type) {
+  .e-checkbox.e-checkbox--visual-type-#{$visual-type} {
+    & > .e-checkbox__label {
+      font-weight: bold;
+      color: map.get($colors, $visual-type);
+    }
+
+    & > .e-checkbox__inner:focus {
+      outline-color: map.get($colors, $visual-type);
+    }
+
+    & > .e-checkbox__inner:disabled ~ .e-checkbox__label {
+      color: map.get($colors, "#{$visual-type}-lighter");
+    }
+  }
+}
+
+@include make-visual-style("primary");
+@include make-visual-style("danger");
