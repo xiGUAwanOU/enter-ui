@@ -9,18 +9,32 @@
   align-items: center;
 }
 
-.e-checkbox__inner {
-  margin: 0 7px 0 0;
-  cursor: pointer;
+.e-checkbox__hidden {
+  position: absolute;
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
 
-  &:disabled {
-    cursor: not-allowed;
-  
-    & ~ .e-checkbox__label {
-      cursor: not-allowed;
-      color: #BCC1C3;
-    }
-  }
+.e-checkbox__box {
+  display: inline-block;
+  border-radius: 2px;
+  width: 14px;
+  height: 14px;
+  background-color: black;
+  margin: 0 5px 0 0;
+  cursor: pointer;
+}
+
+.e-checkbox__box-tick {
+  vertical-align: top;
+  fill: none;
+  stroke: #FFFFFF;
+  stroke-width: 2.5px;
+}
+
+.e-checkbox__label {
+  cursor: pointer;
 }
 
 .e-checkbox {
@@ -39,20 +53,38 @@
 
 @mixin make-visual-style($visual-type) {
   .e-checkbox.e-checkbox--visual-type-#{$visual-type} {
-    & > .e-checkbox__label {
-      font-weight: bold;
-      color: map.get($colors, $visual-type);
+    & > .e-checkbox__box {
+      background-color: map.get($colors, $visual-type);
     }
 
-    & > .e-checkbox__inner:focus {
-      outline-color: map.get($colors, $visual-type);
+    & > .e-checkbox__hidden:focus ~ .e-checkbox__box {
+      @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
     }
 
-    & > .e-checkbox__inner:disabled ~ .e-checkbox__label {
-      color: map.get($colors, "#{$visual-type}-lighter");
+    &:hover > .e-checkbox__box {
+      @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
+      background-color: map.get($colors, "#{$visual-type}-light");
+    }
+
+    &:active:hover > .e-checkbox__box {
+      background-color: map.get($colors, "#{$visual-type}-dark");
+    }
+
+    & > .e-checkbox__hidden:disabled {
+      &  ~ .e-checkbox__box {
+        @include disable-box-shadow();
+        background-color: map.get($colors, "#{$visual-type}-lighter");
+        cursor: not-allowed;
+      }
+
+      &  ~ .e-checkbox__label {
+        color: #AAAAAA;
+        cursor: not-allowed;
+      }
     }
   }
 }
 
+@include make-visual-style("default");
 @include make-visual-style("primary");
 @include make-visual-style("danger");

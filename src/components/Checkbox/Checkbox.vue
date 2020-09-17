@@ -6,7 +6,12 @@
       `e-checkbox--size-${size}`,
     ]"
   >
-    <input class="e-checkbox__inner" type="checkbox" :disabled="disabled" v-model="inputValue" />
+    <input class="e-checkbox__hidden" type="checkbox" :disabled="disabled" v-model="inputValue" />
+    <span class="e-checkbox__box">
+      <svg v-if="modelValue" class="e-checkbox__box-tick" width="14" height="14">
+        <polyline points="2,7 5,10 12,3" />
+      </svg>
+    </span>
     <span class="e-checkbox__label">
       <slot name />
       <slot v-if="modelValue" name="true-content" />

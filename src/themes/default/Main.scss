@@ -2,3 +2,10 @@
 @import 'Checkbox';
 @import 'Input';
 @import 'MultilineInput';
+
+* {
+  color: #626567;
+  font-family: Verdana, Geneva, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

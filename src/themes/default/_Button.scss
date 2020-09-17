@@ -7,6 +7,7 @@
   display: inline-block;
   vertical-align: middle;
   outline: 0;
+  color: #ffffff;
   cursor: pointer;
   transition: border-color box-shadow 0.1s;
 
@@ -39,7 +40,6 @@
   .e-button.e-button--visual-type-#{$visual-type}{
     border-color: map.get($colors, $visual-type);
     background-color: map.get($colors, $visual-type);
-    color: #ffffff;
 
     &:focus {
       @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
@@ -49,20 +49,17 @@
       @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
       border-color: map.get($colors, "#{$visual-type}-light");
       background-color: map.get($colors, "#{$visual-type}-light");
-      color: #ffffff;
     }
 
     &:active:hover {
       border-color: map.get($colors, "#{$visual-type}-dark");
       background-color: map.get($colors, "#{$visual-type}-dark");
-      color: #ffffff;
     }
 
     &:disabled {
       @include disable-box-shadow();
       border-color: map.get($colors, "#{$visual-type}-lighter");
       background-color: map.get($colors, "#{$visual-type}-lighter");
-      color: #ffffff;
     }
   }
 }

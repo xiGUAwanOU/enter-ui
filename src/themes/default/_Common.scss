@@ -30,13 +30,6 @@ $colors: (
   "danger-lighter": #E6B0AA,
 );
 
-* {
-  color: #626567;
-  font-family: Verdana, Geneva, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 @mixin make-border() {
   box-sizing: border-box;
   border-width: 1px;
