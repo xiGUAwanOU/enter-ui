@@ -107,8 +107,6 @@ export default defineComponent({
         return;
       }
 
-      console.log(newStringValue);
-
       ctx.emit('update:modelValue', Number(newStringValue
         .replaceAll(props.groupingSeparator, '')
         .replaceAll(props.decimalSeparator, '.')));
@@ -120,10 +118,10 @@ export default defineComponent({
         return;
       }
 
-      let stringModelValue = new Intl.NumberFormat('en-US', {
-        useGrouping: false,
-        maximumFractionDigits: 20,
-      }).format(props.modelValue);
+      let stringModelValue =
+        props.fractionalDigits
+          ? props.modelValue.toFixed(props.fractionalDigits)
+          : props.modelValue.toString();
       stringModelValue = stringModelValue.replaceAll('.', props.decimalSeparator);
 
       stringValue.value = sanitizeStringValue(stringModelValue, thousandsGrouping);

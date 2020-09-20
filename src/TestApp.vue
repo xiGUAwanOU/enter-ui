@@ -1,15 +1,15 @@
 <template>
   <div class="test-app">
-    <e-button>Hello</e-button>
+    <e-button @click="eventHandler">Hello</e-button>
     <br />
     <br />
-    <e-button size="medium" visual-type="primary">Hello</e-button>
+    <e-button size="medium" visual-type="primary" @click="eventHandler">Hello</e-button>
     <br />
     <br />
-    <e-button size="large" visual-type="danger">Hello</e-button>
+    <e-button size="large" visual-type="danger" @click="eventHandler">Hello</e-button>
     <br />
     <br />
-    <e-button disabled>Hello</e-button>
+    <e-button disabled @click="eventHandler">Hello</e-button>
     <br />
     <br />
     <e-text-input placeholder="Text input" size="small" v-model="stringValue" />
@@ -27,6 +27,41 @@
     <br />
     <br />
     <e-text-input disabled placeholder="Text input" size="small" v-model="stringValue" />
+    <br />
+    <br />
+    <e-number-input
+      placeholder="Number input"
+      :fractional-digits="2"
+      size="small"
+      v-model="numberValue"
+    />
+    <br />
+    <br />
+    <e-number-input
+      placeholder="Number input"
+      :fractional-digits="2"
+      size="medium"
+      visual-type="primary"
+      v-model="numberValue"
+    />
+    <br />
+    <br />
+    <e-number-input
+      placeholder="Number input"
+      :fractional-digits="2"
+      size="large"
+      visual-type="danger"
+      v-model="numberValue"
+    />
+    <br />
+    <br />
+    <e-number-input
+      disabled
+      placeholder="Number input"
+      :fractional-digits="2"
+      size="small"
+      v-model="numberValue"
+    />
     <br />
     <br />
     <e-multiline-input placeholder="Multiline input" v-model="stringValue" />
@@ -130,9 +165,15 @@ import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   setup() {
+    function eventHandler(event: any) {
+      console.log('Event: ' + event);
+    }
+
     const booleanValue = ref(false);
 
     const stringValue = ref('');
+
+    const numberValue = ref(NaN);
 
     const choices = [
       { key: 'one', label: 'First choice' },
@@ -149,8 +190,10 @@ export default defineComponent({
     const radioValue = ref('one');
 
     return {
+      eventHandler,
       booleanValue,
       stringValue,
+      numberValue,
       choices,
       checkboxValues,
       radioValue,
