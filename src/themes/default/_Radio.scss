@@ -2,81 +2,80 @@
 
 @import "Common";
 
-.e-checkbox {
+.e-radio {
   display: inline-flex;
   vertical-align: middle;
   justify-content: center;
   align-items: center;
 }
 
-.e-checkbox__hidden {
+.e-radio__hidden {
   position: absolute;
   height: 0;
   width: 0;
   opacity: 0;
 }
 
-.e-checkbox__box {
+.e-radio__circle {
   display: inline-block;
-  border-radius: 2px;
+  border-radius: 50%;
   width: 14px;
   height: 14px;
+  background-color: #000000;
   margin: 0 5px 0 0;
   cursor: pointer;
 }
 
-.e-checkbox__tick {
+.e-radio__dot {
   display: block;
-  fill: none;
-  stroke: #ffffff;
-  stroke-width: 2.5px;
+  fill: #ffffff;
 }
 
-.e-checkbox__label {
+.e-radio__label {
   cursor: pointer;
 }
 
-.e-checkbox {
-  &.e-checkbox--size-small {
+.e-radio {
+  &.e-radio--size-small {
     font-size: 13px;
   }
 
-  &.e-checkbox--size-medium {
+  &.e-radio--size-medium {
     font-size: 15px;
   }
 
-  &.e-checkbox--size-large {
+  &.e-radio--size-large {
     font-size: 17px;
   }
 }
 
 @mixin make-visual-style($visual-type) {
-  .e-checkbox.e-checkbox--visual-type-#{$visual-type} {
-    & > .e-checkbox__box {
+  .e-radio.e-radio--visual-type-#{$visual-type} {
+    & > .e-radio__circle {
       background-color: map.get($colors, $visual-type);
     }
 
-    & > .e-checkbox__hidden:focus ~ .e-checkbox__box {
+    & > .e-radio__hidden:focus ~ .e-radio__circle {
       @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
     }
 
-    &:hover > .e-checkbox__box {
+    &:hover > .e-radio__circle {
       @include make-box-shadow(map.get($colors, "#{$visual-type}-lighter"));
       background-color: map.get($colors, "#{$visual-type}-light");
     }
 
-    &:active:hover > .e-checkbox__box {
+    &:active:hover > .e-radio__circle {
       background-color: map.get($colors, "#{$visual-type}-dark");
     }
 
-    & > .e-checkbox__hidden:disabled {
-      & ~ .e-checkbox__box {
+    & > .e-radio__hidden:disabled {
+      & ~ .e-radio__circle {
         @include disable-box-shadow();
         background-color: map.get($colors, "#{$visual-type}-lighter");
         cursor: not-allowed;
       }
 
-      & ~ .e-checkbox__label {
+      & ~ .e-radio__label {
         color: #aaaaaa;
         cursor: not-allowed;
       }

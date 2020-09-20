@@ -2,29 +2,29 @@
 
 @import "Common";
 
-.e-checkbox-group {
+.e-radio-group {
   @include make-border();
   display: inline-block;
   margin: 0;
   padding: 6px 15px 9px 15px;
 }
 
-.e-checkbox-group.e-checkbox-group--horizontal {
+.e-radio-group.e-radio-group--horizontal {
   padding-right: 0;
 
-  & > .e-checkbox-group__choices > .e-checkbox-group__choice {
+  & > .e-radio-group__choices > .e-radio-group__choice {
     display: inline-block;
     margin-right: 15px;
   }
 }
 
-.e-checkbox-list__filter {
+.e-radio-list__filter {
   width: 100%;
   margin: 5px 0;
 }
 
 @mixin make-visual-style($visual-type) {
-  .e-checkbox-group.e-checkbox-group--visual-type-#{$visual-type} {
+  .e-radio-group.e-radio-group--visual-type-#{$visual-type} {
     border-color: map.get($colors, $visual-type);
   }
 }

@@ -1,20 +1,20 @@
 <template>
   <div
-    class="e-checkbox-group"
+    class="e-radio-group"
     :class="[
-      { 'e-checkbox-group--horizontal': horizontal },
-      `e-checkbox-group--visual-type-${visualType}`,
+      { 'e-radio-group--horizontal': horizontal },
+      `e-radio-group--visual-type-${visualType}`,
     ]"
   >
-    <div class="e-checkbox-group__choices">
-      <div v-for="choice in choices" :key="choice.key" class="e-checkbox-group__choice">
-        <e-checkbox
+    <div class="e-radio-group__choices">
+      <div v-for="(choice, key) in choices" :key="key" class="e-radio-group__choice">
+        <e-radio
           :disabled="disabled || choice.disabled"
           :size="size"
           :visual-type="visualType"
           :value="choice.key"
           v-model="inputValue"
-        >{{ choice.label }}</e-checkbox>
+        >{{ choice.label }}</e-radio>
       </div>
     </div>
   </div>
@@ -33,11 +33,11 @@ export interface ChoiceOption {
 }
 
 export default defineComponent({
-  name: 'ECheckboxGroup',
+  name: 'ERadioGroup',
 
   props: {
-    modelValue: { type: Array as PropType<string[]>, required: true },
-    choices: { type: Array as PropType<ChoiceOption[]>, required: true },
+    modelValue: { type: String, required: true },
+    choices: { type: Object as PropType<ChoiceOption>, required: true },
     disabled: { type: Boolean, default: false },
     horizontal: { type: Boolean, default: false },
     size: { type: String as PropType<ComponentSize>, default: 'small' },

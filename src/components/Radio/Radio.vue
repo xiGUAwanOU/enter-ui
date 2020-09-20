@@ -1,24 +1,24 @@
 <template>
   <label
-    class="e-checkbox"
+    class="e-radio"
     :class="[
-      `e-checkbox--visual-type-${visualType}`,
-      `e-checkbox--size-${size}`,
+      `e-radio--visual-type-${visualType}`,
+      `e-radio--size-${size}`,
     ]"
   >
     <input
-      class="e-checkbox__hidden"
-      type="checkbox"
+      class="e-radio__hidden"
+      type="radio"
       :disabled="disabled"
       :value="value"
       v-model="inputValue"
     />
-    <span class="e-checkbox__box">
-      <svg v-if="checked" class="e-checkbox__tick" width="14" height="14">
-        <polyline points="2,7.5 5,10.5 12,3.5" />
+    <span class="e-radio__circle">
+      <svg v-if="selected" class="e-radio__dot" width="14" height="14">
+        <circle cx="7" cy="7" r="3" />
       </svg>
     </span>
-    <span class="e-checkbox__label">
+    <span class="e-radio__label">
       <slot />
     </span>
   </label>
@@ -26,15 +26,14 @@
 
 <script lang="ts">
 import { PropType, computed, defineComponent } from 'vue';
-import { isBoolean as _isBoolean } from 'lodash';
 
 import { ActionVisualType, ComponentSize } from '@/components/Shared/Common.types';
 
 export default defineComponent({
-  name: 'ECheckbox',
+  name: 'ERadio',
 
   props: {
-    modelValue: { type: [ Boolean, Array ], required: true },
+    modelValue: { type: String, required: true },
     value: { type: String },
     disabled: { type: Boolean, default: false },
     size: { type: String as PropType<ComponentSize>, default: 'small' },
@@ -42,9 +41,7 @@ export default defineComponent({
   },
 
   setup(props, ctx) {
-    const checked = computed(() => _isBoolean(props.modelValue)
-      ? props.modelValue
-      : props.modelValue.includes(props.value));
+    const selected = computed(() => props.modelValue === props.value);
 
     const inputValue = computed({
       get: () => props.modelValue,
@@ -54,7 +51,7 @@ export default defineComponent({
     });
 
     return {
-      checked,
+      selected,
       inputValue,
     };
   },

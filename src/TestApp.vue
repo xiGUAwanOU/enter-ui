@@ -12,18 +12,6 @@
     <e-button disabled>Hello</e-button>
     <br />
     <br />
-    <e-checkbox v-model="booleanValue">Something</e-checkbox>
-    <br />
-    <br />
-    <e-checkbox v-model="booleanValue" size="medium" visual-type="primary">Something</e-checkbox>
-    <br />
-    <br />
-    <e-checkbox v-model="booleanValue" size="large" visual-type="danger">Something</e-checkbox>
-    <br />
-    <br />
-    <e-checkbox v-model="booleanValue" disabled>Something</e-checkbox>
-    <br />
-    <br />
     <e-text-input placeholder="Text input" size="small" v-model="stringValue" />
     <br />
     <br />
@@ -63,44 +51,77 @@
     <e-multiline-input disabled placeholder="Multiline input" v-model="stringValue" />
     <br />
     <br />
+    <e-checkbox value="one" size="small" v-model="checkboxValues">One</e-checkbox>
+    <br />
+    <e-checkbox value="two" size="medium" visual-type="primary" v-model="checkboxValues">Two</e-checkbox>
+    <br />
+    <e-checkbox value="three" size="large" visual-type="danger" v-model="checkboxValues">Three</e-checkbox>
+    <br />
+    <e-checkbox value="four" size="small" disabled v-model="checkboxValues">Four</e-checkbox>
+    <br />
+    <br />
     <e-checkbox-group
-      :choices="checkboxGroupChoices"
-      horizontal
+      class="whatever-input"
+      :choices="choices"
+      filtered
+      filter-placeholder="Filter"
       size="small"
-      v-model="stringValues"
+      v-model="checkboxValues"
     />
     <br />
     <br />
     <e-checkbox-group
-      :choices="checkboxGroupChoices"
+      :choices="choices"
       horizontal
       size="medium"
       visual-type="primary"
-      v-model="stringValues"
+      v-model="checkboxValues"
     />
     <br />
     <br />
     <e-checkbox-group
-      :choices="checkboxGroupChoices"
+      :choices="choices"
       horizontal
       size="large"
       visual-type="danger"
-      v-model="stringValues"
+      v-model="checkboxValues"
     />
     <br />
     <br />
-    <e-checkbox-group
-      :choices="checkboxGroupChoices"
+    <e-checkbox-group :choices="choices" horizontal disabled size="small" v-model="checkboxValues" />
+    <br />
+    <br />
+    <e-radio value="one" size="small" v-model="radioValue">One</e-radio>
+    <br />
+    <e-radio value="two" size="medium" visual-type="primary" v-model="radioValue">Two</e-radio>
+    <br />
+    <e-radio value="three" size="large" visual-type="danger" v-model="radioValue">Three</e-radio>
+    <br />
+    <e-radio value="four" disabled size="small" v-model="radioValue">Four</e-radio>
+    <br />
+    <br />
+    <e-radio-group :choices="choices" size="small" v-model="radioValue" />
+    <br />
+    <br />
+    <e-radio-group
+      :choices="choices"
+      size="medium"
       horizontal
-      disabled
-      size="small"
-      v-model="stringValues"
+      visual-type="primary"
+      v-model="radioValue"
     />
     <br />
     <br />
-    <e-checkbox value="one" v-model="stringValues">One</e-checkbox>
+    <e-radio-group
+      :choices="choices"
+      size="large"
+      horizontal
+      visual-type="danger"
+      v-model="radioValue"
+    />
     <br />
-    <e-checkbox value="two" v-model="stringValues">Two</e-checkbox>
+    <br />
+    <e-radio-group :choices="choices" size="small" horizontal v-model="radioValue" />
   </div>
 </template>
 
@@ -113,21 +134,26 @@ export default defineComponent({
 
     const stringValue = ref('');
 
-    const checkboxGroupChoices = {
-      one: { label: 'First choice' },
-      two: { label: 'Second choice' },
-      three: { label: 'Third choice' },
-      four: { label: 'Fourth choice' },
-      five: { label: 'Fifth choice' },
-      six: { label: 'Sixth choice' },
-    };
-    const stringValues = ref([ 'one' ]);
+    const choices = [
+      { key: 'one', label: 'First choice' },
+      { key: 'two', label: 'Second choice' },
+      { key: 'three', label: 'Thrid choice' },
+      { key: 'four', label: 'Fourth choice' },
+      { key: 'five', label: 'Fifth choice' },
+      { key: 'six', label: 'Sixth choice' },
+      { key: 'seven', label: 'Seventh choice' },
+      { key: 'eight', label: 'Eighth choice' },
+      { key: 'nine', label: 'Ninth choice' },
+    ];
+    const checkboxValues = ref([ 'one' ]);
+    const radioValue = ref('one');
 
     return {
       booleanValue,
       stringValue,
-      checkboxGroupChoices,
-      stringValues,
+      choices,
+      checkboxValues,
+      radioValue,
     };
   },
 });
