@@ -1,6 +1,6 @@
 @use "sass:map";
 
-@import 'Common';
+@import "Common";
 
 .e-checkbox-group {
   @include make-border();

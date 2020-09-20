@@ -3,7 +3,7 @@
     class="e-checkbox-group"
     :class="[
       { 'e-checkbox-group--horizontal': horizontal },
-      `e-checkbox-group--visual-type-${visualType}`
+      `e-checkbox-group--visual-type-${visualType}`,
     ]"
   >
     <e-text-input
@@ -16,13 +16,13 @@
       v-model="filterText"
     />
     <div class="e-checkbox-group__choice-wrapper">
-      <div v-for="(choice, key) in filteredOptions" :key="key" class="e-checkbox-group__choice">
+      <div v-for="(choice, key) in filteredChoices" :key="key" class="e-checkbox-group__choice">
         <e-checkbox
           :disabled="disabled || choice.disabled"
           :size="size"
           :visual-type="visualType"
-          :model-value="modelValue.includes(key)"
-          @update:modelValue="toggleValue(key, $event)"
+          :value="key"
+          v-model="inputValue"
         >{{ choice.label }}</e-checkbox>
       </div>
     </div>
@@ -34,7 +34,7 @@ import { PropType, computed, defineComponent, ref } from 'vue';
 
 import { ActionVisualType, ComponentSize } from '@/components/Shared/Common.types';
 
-interface Options {
+interface ChoiceOption {
   [key: string]: {
     label: string;
     value: string;
@@ -47,7 +47,7 @@ export default defineComponent({
 
   props: {
     modelValue: { type: Array as PropType<string[]>, required: true },
-    options: { type: Object as PropType<Options>, required: true },
+    choices: { type: Object as PropType<ChoiceOption>, required: true },
     disabled: { type: Boolean, default: false },
     filtered: { type: Boolean, default: false },
     filterPlaceholder: { type: String, default: '' },
@@ -59,9 +59,9 @@ export default defineComponent({
   setup(props, ctx) {
     const filterText = ref('');
 
-    const filteredOptions = computed(() => {
-      const result: Options = {};
-      for (const [ key, choice ] of Object.entries(props.options)) {
+    const filteredChoices = computed(() => {
+      const result: ChoiceOption = {};
+      for (const [ key, choice ] of Object.entries(props.choices)) {
         if (choice.label.toLocaleLowerCase().includes(filterText.value.toLocaleLowerCase())) {
           result[key] = choice;
         }
@@ -69,18 +69,17 @@ export default defineComponent({
       return result;
     });
 
-    function toggleValue(key: string, value: boolean) {
-      if (value) {
-        ctx.emit('update:modelValue', [ ...props.modelValue, key ]);
-      } else {
-        ctx.emit('update:modelValue', props.modelValue.filter((selected) => selected !== key));
-      }
-    }
+    const inputValue = computed({
+      get: () => props.modelValue,
+      set: (newValue) => {
+        ctx.emit('update:modelValue', newValue);
+      },
+    });
 
     return {
       filterText,
-      filteredOptions,
-      toggleValue,
+      filteredChoices,
+      inputValue,
     };
   },
 });

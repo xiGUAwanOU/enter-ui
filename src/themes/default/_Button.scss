@@ -1,6 +1,6 @@
 @use "sass:map";
 
-@import 'Common';
+@import "Common";
 
 .e-button {
   @include make-border();
@@ -36,7 +36,7 @@
 }
 
 @mixin make-visual-style($visual-type) {
-  .e-button.e-button--visual-type-#{$visual-type}{
+  .e-button.e-button--visual-type-#{$visual-type} {
     border-color: map.get($colors, $visual-type);
     background-color: map.get($colors, $visual-type);
 

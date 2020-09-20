@@ -1,6 +1,6 @@
 @use "sass:map";
 
-@import 'Common';
+@import "Common";
 
 .e-checkbox {
   display: inline-flex;
@@ -29,7 +29,7 @@
 .e-checkbox__box-tick {
   display: block;
   fill: none;
-  stroke: #FFFFFF;
+  stroke: #ffffff;
   stroke-width: 2.5px;
 }
 
@@ -71,14 +71,14 @@
     }
 
     & > .e-checkbox__hidden:disabled {
-      &  ~ .e-checkbox__box {
+      & ~ .e-checkbox__box {
         @include disable-box-shadow();
         background-color: map.get($colors, "#{$visual-type}-lighter");
         cursor: not-allowed;
       }
 
-      &  ~ .e-checkbox__label {
-        color: #AAAAAA;
+      & ~ .e-checkbox__label {
+        color: #aaaaaa;
         cursor: not-allowed;
       }
     }
