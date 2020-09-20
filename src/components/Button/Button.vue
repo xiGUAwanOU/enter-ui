@@ -5,8 +5,7 @@
       `e-button--visual-type-${visualType}`,
       `e-button--size-${size}`,
     ]"
-    :disabled="disabled"
-    @click="handleClick"
+    v-bind="$attrs"
   >
     <slot></slot>
   </button>
@@ -20,20 +19,11 @@ import { ActionVisualType, ComponentSize } from '@/components/Shared/Common.type
 export default defineComponent({
   name: 'EButton',
 
+  inheritAttrs: false,
+
   props: {
-    disabled: { type: Boolean, default: false },
     size: { type: String as PropType<ComponentSize>, default: 'small' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
-  },
-
-  setup(props, ctx) {
-    function handleClick() {
-      ctx.emit('click');
-    }
-
-    return {
-      handleClick,
-    };
   },
 });
 </script>
