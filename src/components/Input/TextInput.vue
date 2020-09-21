@@ -6,8 +6,7 @@
       `e-input--size-${size}`,
     ]"
     :type="hideContent ? 'password' : 'text'"
-    :disabled="disabled"
-    :placeholder="placeholder"
+    v-bind="$attrs"
     v-model="inputValue"
   />
 </template>
@@ -20,11 +19,11 @@ import { ActionVisualType, ComponentSize } from '@/components/Shared/Common.type
 export default defineComponent({
   name: 'ETextInput',
 
+  inheritAttrs: false,
+
   props: {
     modelValue: { type: String, required: true },
-    disabled: { type: Boolean, default: false },
     hideContent: { type: Boolean, default: false },
-    placeholder: { type: String, default: '' },
     size: { type: String as PropType<ComponentSize>, default: 'small' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
   },

@@ -26,10 +26,14 @@
 }
 
 .e-checkbox__tick {
-  display: block;
+  display: none;
   fill: none;
   stroke: #ffffff;
   stroke-width: 2.5px;
+}
+
+.e-checkbox__hidden:checked ~ .e-checkbox__box > .e-checkbox__tick {
+  display: block;
 }
 
 .e-checkbox__label {

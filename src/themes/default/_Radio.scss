@@ -27,8 +27,12 @@
 }
 
 .e-radio__dot {
-  display: block;
+  display: none;
   fill: #ffffff;
+}
+
+.e-radio__hidden:checked ~ .e-radio__circle > .e-radio__dot {
+  display: block;
 }
 
 .e-radio__label {

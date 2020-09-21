@@ -6,8 +6,7 @@
       `e-input--size-${size}`,
     ]"
     type="text"
-    :placeholder="placeholder"
-    :disabled="disabled"
+    v-bind="$attrs"
     :value="stringValue"
     @input="onInput"
     @blur="onBlur"
@@ -22,10 +21,10 @@ import { ActionVisualType, ComponentSize } from '@/components/Shared/Common.type
 export default defineComponent({
   name: 'ENumberInput',
 
+  inheritAttrs: false,
+
   props: {
     modelValue: { type: Number, required: true },
-    disabled: { type: Boolean, default: false },
-    placeholder: { type: String, default: '' },
     fractionalDigits: { type: Number },
     decimalSeparator: { type: String, default: '.' },
     groupingSeparator: { type: String, default: ',' },

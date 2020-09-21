@@ -38,8 +38,8 @@ export default defineComponent({
   props: {
     modelValue: { type: Array as PropType<string[]>, required: true },
     choices: { type: Array as PropType<ChoiceOption[]>, required: true },
-    disabled: { type: Boolean, default: false },
     horizontal: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
     size: { type: String as PropType<ComponentSize>, default: 'small' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
   },

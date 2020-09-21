@@ -64,11 +64,12 @@
     />
     <br />
     <br />
-    <e-multiline-input placeholder="Multiline input" v-model="stringValue" />
+    <e-multiline-input placeholder="Multiline input" rows="5" v-model="stringValue" />
     <br />
     <br />
     <e-multiline-input
       placeholder="Multiline input"
+      rows="5"
       size="medium"
       visual-type="primary"
       v-model="stringValue"
@@ -77,13 +78,14 @@
     <br />
     <e-multiline-input
       placeholder="Multiline input"
+      rows="5"
       size="large"
       visual-type="danger"
       v-model="stringValue"
     />
     <br />
     <br />
-    <e-multiline-input disabled placeholder="Multiline input" v-model="stringValue" />
+    <e-multiline-input disabled placeholder="Multiline input" rows="5" v-model="stringValue" />
     <br />
     <br />
     <e-checkbox value="one" size="small" v-model="checkboxValues">One</e-checkbox>
