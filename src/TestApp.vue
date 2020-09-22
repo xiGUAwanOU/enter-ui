@@ -1,6 +1,6 @@
 <template>
   <div class="test-app">
-    <e-button @click="eventHandler">Hello</e-button>
+    <e-button size="small" visual-type="default" @click="eventHandler">Hello</e-button>
     <br />
     <br />
     <e-button size="medium" visual-type="primary" @click="eventHandler">Hello</e-button>
@@ -12,7 +12,12 @@
     <e-button disabled @click="eventHandler">Hello</e-button>
     <br />
     <br />
-    <e-text-input placeholder="Text input" size="small" v-model="stringValue" />
+    <e-text-input
+      placeholder="Text input"
+      size="small"
+      visual-type="default"
+      v-model="stringValue"
+    />
     <br />
     <br />
     <e-text-input
@@ -26,13 +31,14 @@
     <e-text-input placeholder="Text input" size="large" visual-type="danger" v-model="stringValue" />
     <br />
     <br />
-    <e-text-input disabled placeholder="Text input" size="small" v-model="stringValue" />
+    <e-text-input disabled placeholder="Text input" v-model="stringValue" />
     <br />
     <br />
     <e-number-input
       placeholder="Number input"
       :fractional-digits="2"
       size="small"
+      visual-type="default"
       v-model="numberValue"
     />
     <br />
@@ -59,12 +65,17 @@
       disabled
       placeholder="Number input"
       :fractional-digits="2"
-      size="small"
       v-model="numberValue"
     />
     <br />
     <br />
-    <e-multiline-input placeholder="Multiline input" rows="5" v-model="stringValue" />
+    <e-multiline-input
+      placeholder="Multiline input"
+      rows="5"
+      size="small"
+      visual-type="default"
+      v-model="stringValue"
+    />
     <br />
     <br />
     <e-multiline-input
@@ -88,13 +99,13 @@
     <e-multiline-input disabled placeholder="Multiline input" rows="5" v-model="stringValue" />
     <br />
     <br />
-    <e-checkbox value="one" size="small" v-model="checkboxValues">One</e-checkbox>
+    <e-checkbox value="one" size="small" visual-type="default" v-model="checkboxValues">One</e-checkbox>
     <br />
     <e-checkbox value="two" size="medium" visual-type="primary" v-model="checkboxValues">Two</e-checkbox>
     <br />
     <e-checkbox value="three" size="large" visual-type="danger" v-model="checkboxValues">Three</e-checkbox>
     <br />
-    <e-checkbox value="four" size="small" disabled v-model="checkboxValues">Four</e-checkbox>
+    <e-checkbox value="four" disabled v-model="checkboxValues">Four</e-checkbox>
     <br />
     <br />
     <e-checkbox-group
@@ -103,6 +114,7 @@
       filtered
       filter-placeholder="Filter"
       size="small"
+      visual-type="default"
       v-model="checkboxValues"
     />
     <br />
@@ -125,26 +137,26 @@
     />
     <br />
     <br />
-    <e-checkbox-group :choices="choices" horizontal disabled size="small" v-model="checkboxValues" />
+    <e-checkbox-group :choices="choices" horizontal disabled v-model="checkboxValues" />
     <br />
     <br />
-    <e-radio value="one" size="small" v-model="radioValue">One</e-radio>
+    <e-radio value="one" size="small" visual-type="default" v-model="radioValue">One</e-radio>
     <br />
     <e-radio value="two" size="medium" visual-type="primary" v-model="radioValue">Two</e-radio>
     <br />
     <e-radio value="three" size="large" visual-type="danger" v-model="radioValue">Three</e-radio>
     <br />
-    <e-radio value="four" disabled size="small" v-model="radioValue">Four</e-radio>
+    <e-radio value="four" disabled v-model="radioValue">Four</e-radio>
     <br />
     <br />
-    <e-radio-group :choices="choices" size="small" v-model="radioValue" />
+    <e-radio-group :choices="choices" size="small" visual-type="default" v-model="radioValue" />
     <br />
     <br />
     <e-radio-group
       :choices="choices"
       size="medium"
-      horizontal
       visual-type="primary"
+      horizontal
       v-model="radioValue"
     />
     <br />
@@ -152,13 +164,13 @@
     <e-radio-group
       :choices="choices"
       size="large"
-      horizontal
       visual-type="danger"
+      horizontal
       v-model="radioValue"
     />
     <br />
     <br />
-    <e-radio-group :choices="choices" size="small" horizontal v-model="radioValue" />
+    <e-radio-group :choices="choices" horizontal v-model="radioValue" />
   </div>
 </template>
 
