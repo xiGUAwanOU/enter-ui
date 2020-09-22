@@ -1,0 +1,33 @@
+@use "sass:map";
+
+@import "Common";
+
+.e-popover {
+  display: inline-block;
+  position: relative;
+}
+
+.e-popover__content {
+  position: absolute;
+  z-index: 1;
+
+  &--position-bottom {
+    top: 100%;
+    left: 0;
+  }
+
+  &--position-right {
+    top: 0;
+    left: 100%;
+  }
+}
+
+.e-popover__fade-enter-active,
+.e-popover__fade-leave-active {
+  transition: opacity 0.2s;
+}
+
+.e-popover__fade-enter-from,
+.e-popover__fade-leave-to {
+  opacity: 0;
+}

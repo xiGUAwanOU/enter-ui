@@ -3,11 +3,13 @@
 @import "CheckboxGroup";
 @import "Input";
 @import "MultilineInput";
+@import "Popover";
 @import "Radio";
 @import "RadioGroup";
 
-* {
+body {
   color: #626567;
+  font-size: 15px;
   font-family: Verdana, Geneva, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
