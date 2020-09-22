@@ -40,7 +40,7 @@ export default defineComponent({
     choices: { type: Array as PropType<ChoiceOption[]>, required: true },
     horizontal: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
-    size: { type: String as PropType<ComponentSize>, default: 'small' },
+    size: { type: String as PropType<ComponentSize>, default: 'medium' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
   },
 

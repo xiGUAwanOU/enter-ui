@@ -28,7 +28,7 @@ export default defineComponent({
     fractionalDigits: { type: Number },
     decimalSeparator: { type: String, default: '.' },
     groupingSeparator: { type: String, default: ',' },
-    size: { type: String as PropType<ComponentSize>, default: 'small' },
+    size: { type: String as PropType<ComponentSize>, default: 'medium' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
   },
 

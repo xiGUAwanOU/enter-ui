@@ -5,6 +5,7 @@
 .e-multiline-input {
   @include make-border();
   outline: 0;
+  font-family: inherit;
 
   &:disabled {
     cursor: not-allowed;
@@ -18,17 +19,17 @@
 
 .e-multiline-input {
   &.e-multiline-input--size-small {
-    padding: 0 8px;
+    padding: 4px 8px;
     font-size: 13px;
   }
 
   &.e-multiline-input--size-medium {
-    padding: 0 10px;
+    padding: 5px 10px;
     font-size: 15px;
   }
 
   &.e-multiline-input--size-large {
-    padding: 0 12px;
+    padding: 6px 12px;
     font-size: 17px;
   }
 }

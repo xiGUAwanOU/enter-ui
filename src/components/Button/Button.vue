@@ -22,7 +22,7 @@ export default defineComponent({
   inheritAttrs: false,
 
   props: {
-    size: { type: String as PropType<ComponentSize>, default: 'small' },
+    size: { type: String as PropType<ComponentSize>, default: 'medium' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
   },
 });

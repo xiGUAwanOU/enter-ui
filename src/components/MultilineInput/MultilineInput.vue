@@ -26,7 +26,7 @@ export default defineComponent({
   props: {
     modelValue: { type: String, required: true },
     resize: { type: String as PropType<ResizeValue>, default: 'none' },
-    size: { type: String as PropType<ComponentSize>, default: 'small' },
+    size: { type: String as PropType<ComponentSize>, default: 'medium' },
     visualType: { type: String as PropType<ActionVisualType>, default: 'default' },
   },
 
